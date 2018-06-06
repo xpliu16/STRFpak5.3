@@ -38,7 +38,7 @@ if exist(file_name, 'file')==0
     return;
 end
 
-[path,name,ext,ver] = fileparts(file_name);
+[path,name,ext] = fileparts(file_name);
 switch ext
 case {'.dat', '.txt'}
      stim = load (file_name);

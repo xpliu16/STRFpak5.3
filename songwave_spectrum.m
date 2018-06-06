@@ -334,9 +334,10 @@ for ii=1:numfiles
     waitbar(ii/numfiles, tempWait);
 
     % 3.1. Take care of Stimulus file
-    [input, fs] = wavread(rawDS{ii}.stimfiles);
+    %[input, fs] = wavread(rawDS{ii}.stimfiles);
+    [input, fs] = audioread(rawDS{ii}.stimfiles);
     
-    [path,name,ext,ver] = fileparts(rawDS{ii}.stimfiles);
+    [path,name,ext] = fileparts(rawDS{ii}.stimfiles);
     % Spectrogram calculation
     %
     desired_fs = ceil(fs/ampsamprate)*ampsamprate;
@@ -406,7 +407,7 @@ for ii=1:numfiles
     % Modified by Junli, 2003 to read new spike arrivial time file
     %
     [rawResp, trials] = read_spikeTime_2cell(rawDS{ii}.respfiles, round(length(input)*1000/fs) +1);
-    [path,name,ext,ver] = fileparts(rawDS{ii}.respfiles);
+    [path,name,ext] = fileparts(rawDS{ii}.respfiles);
     %rawResp = read_spikeTime(rawDS{ii}.respfiles, size(outSpectrum, 2));
 
 

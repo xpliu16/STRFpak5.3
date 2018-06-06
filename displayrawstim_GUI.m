@@ -167,7 +167,7 @@ function pass = checknload(rawDS, n, handles)
 % --------------------------------------------------------------------
     
     % Get data's extension from the filename
-    [path,name,ext,ver] = fileparts(rawDS{n}.stimfiles);
+    [path,name,ext] = fileparts(rawDS{n}.stimfiles);
     set(handles.show_stimfile_text, 'String', [name, ext]);
 
     % Response data
@@ -225,7 +225,8 @@ function pass = checknload(rawDS, n, handles)
 
             case {'.wav'}
 
-                [Data,Freq,Bits] = wavread(rawDS{n}.stimfiles);
+                %[Data,Freq,Bits] = wavread(rawDS{n}.stimfiles);
+                [Data, Freq] = audioread(rawDS{n}.stimfiles);
                 Data = Data./max(max(abs(Data)));
                 DataSize = length(Data);
 

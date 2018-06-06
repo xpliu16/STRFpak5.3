@@ -117,7 +117,7 @@ function pass = checknload(rawDS, n, handles)
 % --------------------------------------------------------------------
     
 % Get data's extension from the filename
-[path,name,ext,ver] = fileparts(rawDS{n}.stimfiles);
+[path,name,ext] = fileparts(rawDS{n}.stimfiles);
 set(handles.show_stimfile_text, 'String', [name, ext]);
 
 % 1. Check if the data is raw data and preprocessed data.
@@ -169,7 +169,8 @@ if rawData == 1
 
         case {'.wav'}
 
-            [Data,Freq,Bits] = wavread(rawDS{n}.stimfiles);
+            %[Data,Freq,Bits] = wavread(rawDS{n}.stimfiles);
+            [Data, Freq] = audioread(rawDS{n}.stimfiles);
             Data = Data./max(max(abs(Data)));
             DataSize = length(Data);
 
@@ -358,7 +359,7 @@ set(handles.smoothconst,'String',psth_smooth);
 
 % Response data
 n = handles.Index;
-[rpath, rname, rext, rver] = fileparts(rawDS{n}.respfiles);
+[rpath, rname, rext] = fileparts(rawDS{n}.respfiles);
 set(handles.show_respfile_text, 'String', [rname, rext]);
 
 if strcmp(rext,'')  % I'm hand-holding MATLAB because you can't do this with a simple "case {'','dat','.txt'}" statement.  Not sure why...
